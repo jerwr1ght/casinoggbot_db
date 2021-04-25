@@ -187,12 +187,11 @@ def chatting(message):
     elif f'🎲 Кости 1 на 1 (Ставка:' in message.text:
         sql.execute(f"SELECT * FROM rollcoop")
         res=sql.fetchone()
-        print(res)
+        bot.send_dice(message.from_user.id, emoji='🎲')
         dice_reply=types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
-        dice_reply.add(types.KeyboardButton('🎲'))
         dice_reply.add(types.KeyboardButton('❌ Отменить действие'))
         if res==None:
-            send_dice=bot.send_message(message.from_user.id, f'Ваша очередь бросать игральную кость! (Отправьте этот эмодзи - 🎲, либо нажмите на игральную кость ниже)\n<b>Действующая ставка:</b> {true_numbers(coop_roll_bet)} 💸', parse_mode='html', reply_markup=dice_reply)
+            send_dice=bot.send_message(message.from_user.id, f'Ваша очередь бросать игральную кость! (Отправьте этот эмодзи - 🎲, либо нажмите на игральную кость выше)\n<b>Действующая ставка:</b> {true_numbers(coop_roll_bet)} 💸', parse_mode='html', reply_markup=dice_reply)
             bot.register_next_step_handler(send_dice, sending_dice_new)
         else:
             sql.execute(f"SELECT * FROM rollcoop WHERE fchatid = '{message.from_user.id}'")
