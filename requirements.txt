@@ -55,7 +55,6 @@ qrcode==6.1
 requests==2.23.0
 rsa==4.6
 setuptools==49.2.0
-shiboken2==5.15.0
 six==1.15.0
 soupsieve==2.0.1
 SpeechRecognition==3.8.1
