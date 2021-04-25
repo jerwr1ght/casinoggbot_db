@@ -187,10 +187,10 @@ def chatting(message):
     elif f'🎲 Кости 1 на 1 (Ставка:' in message.text:
         sql.execute(f"SELECT * FROM rollcoop")
         res=sql.fetchone()
-        bot.send_dice(message.from_user.id, emoji='🎲')
         dice_reply=types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
         dice_reply.add(types.KeyboardButton('❌ Отменить действие'))
         if res==None:
+            bot.send_dice(message.from_user.id, emoji='🎲')
             send_dice=bot.send_message(message.from_user.id, f'Ваша очередь бросать игральную кость! (Отправьте этот эмодзи - 🎲, либо нажмите на игральную кость выше)\n<b>Действующая ставка:</b> {true_numbers(coop_roll_bet)} 💸', parse_mode='html', reply_markup=dice_reply)
             bot.register_next_step_handler(send_dice, sending_dice_new)
         else:
@@ -201,6 +201,7 @@ def chatting(message):
                 del_dice_reply.add(types.InlineKeyboardButton('❌ Отказаться от ставки', callback_data=f'del_dice{str(message.from_user.id)}'))
                 bot.send_message(message.chat.id, "⚠️ Вы уже принимаете участие в одной из игр, но пока что мы не нашли вам противника. Если хотите отказаться от ставки, нажмите на кнопку ниже", reply_markup=del_dice_reply)
                 return
+            bot.send_dice(message.from_user.id, emoji='🎲')
             send_dice=bot.send_message(message.from_user.id, f'Ваша очередь бросать игральную кость! (Отправьте этот эмодзи - 🎲, либо нажмите на игральную кость ниже)\n<b>Действующая ставка:</b> {true_numbers(coop_roll_bet)} 💸', parse_mode='html', reply_markup=dice_reply)
             bot.register_next_step_handler(send_dice, sending_dice_existed)
     elif message.text=='🎰 Играть в рулетку':
