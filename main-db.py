@@ -10,7 +10,7 @@ import time
 #DATABASE_URL = os.environ['DATABASE_URL']
 global db
 global sql
-db = psycopg2.connect(database='dn5ogam91pg6o', user='arfwywhrmkrevi',port="5432", password='125675860de38af1d492d597fb0d1d822a57743deac7328913007198b0f53175', host='ec2-54-87-112-29.compute-1.amazonaws.com', sslmode='require')
+db = psycopg2.connect(database='d6ipfqeahpii9', user='tualpgdacfdowa', port="5432", password='415217eb3e4acb039e30c4ff760b49c478935253484832ffe9e16467eb9007f3', host='ec2-52-23-45-36.compute-1.amazonaws.com', sslmode='require')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS players (chatid TEXT, username TEXT, cash INT, inbank INT, total INT, job_blocked TEXT)""")
 db.commit()
